@@ -44,6 +44,7 @@ namespace cc
         CatBuilder& ID(const uint64_t);
         CatBuilder& Sex(const std::string&);
         CatBuilder& BirthDate(const uint8_t, const uint8_t, const uint16_t);
+        CatBuilder& BirthDate(const DateDMY&);
     public:
         Cat CopyBuild();
         void ExtractBuild(Cat&);

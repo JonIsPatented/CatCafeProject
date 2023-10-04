@@ -93,6 +93,12 @@ cc::CatBuilder& cc::CatBuilder::BirthDate(const uint8_t day, const uint8_t month
     return *this;
 }
 
+cc::CatBuilder& cc::CatBuilder::BirthDate(const DateDMY& date)
+{
+    m_cat.m_birthDate = date;
+    return *this;
+}
+
 cc::Cat cc::CatBuilder::CopyBuild()
 {
     return m_cat;
