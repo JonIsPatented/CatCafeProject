@@ -41,10 +41,12 @@ namespace cc
         CatBuilder& Name(const std::string&);
         CatBuilder& Color(const std::string&);
         CatBuilder& Pattern(const std::string&);
-        CatBuilder& ID(const uint64_t);
+        CatBuilder& ID(const uint32_t);
         CatBuilder& Sex(const std::string&);
         CatBuilder& BirthDate(const uint8_t, const uint8_t, const uint16_t);
         CatBuilder& BirthDate(const DateDMY&);
+    public:
+        CatBuilder& PromptPopulate();
     public:
         Cat CopyBuild();
         void ExtractBuild(Cat&);

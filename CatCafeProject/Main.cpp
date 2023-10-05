@@ -15,4 +15,10 @@ int main()
         .ExtractBuild(cat);
 
     cat.DisplayInformation();
+
+    cc::CatBuilder()
+        .PromptPopulate()
+        .ExtractBuild(cat);
+
+    cat.DisplayInformation();
 }
