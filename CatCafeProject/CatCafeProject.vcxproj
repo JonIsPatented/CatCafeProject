@@ -129,15 +129,21 @@
   <ItemGroup>
     <ClCompile Include="Cat.cpp" />
     <ClCompile Include="CatRegistry.cpp" />
+    <ClCompile Include="Customer.cpp" />
     <ClCompile Include="DateDMY.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StringManip.cpp" />
+    <ClCompile Include="TimeHM.cpp" />
+    <ClCompile Include="VisitLog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cat.h" />
     <ClInclude Include="CatRegistry.h" />
+    <ClInclude Include="Customer.h" />
     <ClInclude Include="DateDMY.h" />
     <ClInclude Include="StringManip.h" />
+    <ClInclude Include="TimeHM.h" />
+    <ClInclude Include="VisitLog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
