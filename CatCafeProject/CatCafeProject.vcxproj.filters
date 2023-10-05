@@ -27,6 +27,9 @@
     <ClCompile Include="StringManip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CatRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cat.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StringManip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CatRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

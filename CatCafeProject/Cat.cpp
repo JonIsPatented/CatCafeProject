@@ -8,12 +8,12 @@
 
 #include "StringManip.h"
 
-void cc::Cat::DisplayInformation()
+void cc::Cat::DisplayInformation() const
 {
     std::cout << *this << std::endl;
 }
 
-std::ostream& cc::operator<<(std::ostream& os, cc::Cat& cat)
+std::ostream& cc::operator<<(std::ostream& os, const cc::Cat& cat)
 {
     return os
         

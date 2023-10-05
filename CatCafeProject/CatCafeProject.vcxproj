@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cat.cpp" />
+    <ClCompile Include="CatRegistry.cpp" />
     <ClCompile Include="DateDMY.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StringManip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cat.h" />
+    <ClInclude Include="CatRegistry.h" />
     <ClInclude Include="DateDMY.h" />
     <ClInclude Include="StringManip.h" />
   </ItemGroup>

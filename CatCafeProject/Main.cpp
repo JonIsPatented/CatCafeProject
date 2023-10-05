@@ -1,24 +1,24 @@
 #include <iostream>
 
 #include "Cat.h"
+#include "CatRegistry.h"
 
 int main()
 {
-    cc::Cat cat; 
-    cc::CatBuilder()
+    cc::CatRegistry catRegistry;
+
+    catRegistry.Add(
+        cc::CatBuilder()
         .Name("Floof")
         .Color("Orange")
         .Pattern("Tabby")
         .ID(19564)
         .Sex("Male")
         .BirthDate(12, 3, 2014)
-        .ExtractBuild(cat);
+        .CopyBuild()
+    );
 
-    cat.DisplayInformation();
+    catRegistry.PromptCreate();
 
-    cc::CatBuilder()
-        .PromptPopulate()
-        .ExtractBuild(cat);
-
-    cat.DisplayInformation();
+    catRegistry.DisplayAllCats();
 }

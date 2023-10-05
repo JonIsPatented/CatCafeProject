@@ -11,8 +11,8 @@ namespace cc
     class Cat
     {
     public:
-        void DisplayInformation();
-        friend std::ostream& operator<<(std::ostream&, Cat&);
+        void DisplayInformation() const;
+        friend std::ostream& operator<<(std::ostream&, const Cat&);
     public:
         Cat();
         Cat(const Cat&);
