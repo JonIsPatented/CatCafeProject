@@ -4,9 +4,16 @@
 #include <iomanip>
 #include <type_traits>
 #include <stdexcept>
-#include <vector>
+#include <map>
 
 #include "StringManip.h"
+
+std::map<std::string, cc::Cat::Sex> cc::CatBuilder::m_sexes{
+    { "male", Cat::Sex::MALE },
+    { "m", Cat::Sex::MALE },
+    { "female", Cat::Sex::FEMALE },
+    { "f", Cat::Sex::FEMALE }
+};
 
 void cc::Cat::DisplayInformation() const
 {
@@ -98,9 +105,10 @@ cc::CatBuilder& cc::CatBuilder::ID(const uint32_t id)
 
 cc::CatBuilder& cc::CatBuilder::Sex(const std::string& sex)
 {
-    if (sex != "Male" && sex != "Female")
+    std::string lowerCaseSex{ cc::toLowerCase(sex) };
+    if (!m_sexes.count(lowerCaseSex))
         throw std::invalid_argument("Must enter either Male or Female");
-    m_cat.m_sex = sex == "Male" ? Cat::Sex::MALE : Cat::Sex::FEMALE;
+    m_cat.m_sex = m_sexes[lowerCaseSex];
     return *this;
 }
 

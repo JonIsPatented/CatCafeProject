@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ostream>
+#include <vector>
 
 #include "DateDMY.h"
 
@@ -52,6 +53,8 @@ namespace cc
         void ExtractBuild(Cat&);
     private:
         Cat m_cat;
+    private:
+        static std::map<std::string, Cat::Sex> m_sexes;
     };
 }
 
