@@ -17,6 +17,13 @@ cc::CatRegistry::CatRegistry(CatRegistry&& other) noexcept
 
 void cc::CatRegistry::DisplayAllCats() const
 {
+    if (!m_cats.size())
+    {
+        std::cout << "----------------------------------\n"
+            << "The are no cats in this registry.\n"
+            "----------------------------------\n" << std::endl;
+        return;
+    }
     std::cout << "----------------------------------\n";
     for (Cat cat : m_cats)
     {
