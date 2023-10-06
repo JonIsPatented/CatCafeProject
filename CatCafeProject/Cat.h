@@ -34,6 +34,7 @@ namespace cc
         } m_sex;
     public:
         friend class CatBuilder;
+        friend class CatRegistry;
     };
 
     class CatBuilder

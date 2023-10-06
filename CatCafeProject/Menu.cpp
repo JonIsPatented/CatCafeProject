@@ -14,6 +14,7 @@ namespace cc
             : m_stringRepresentation(stringRepresentation) {}
         virtual void Activate(cc::Menu&) const = 0;
         const std::string& GetStringRepresentation() const;
+        virtual MenuOption* Clone() const = 0;
     protected:
         cc::CatRegistry& GetCatRegistry(cc::Menu&) const;
     private:
@@ -28,6 +29,7 @@ namespace cc
         {
             GetCatRegistry(callingMenu).PromptCreate();
         }
+        MenuOption* Clone() const { return new AddCatMenuOption(); }
     };
 
     class RemoveCatMenuOption : public MenuOption
@@ -36,8 +38,9 @@ namespace cc
         RemoveCatMenuOption() : MenuOption("Remove Cat") {}
         void Activate(cc::Menu& callingMenu) const
         {
-            // TODO
+            GetCatRegistry(callingMenu).PromptRemove();
         }
+        MenuOption* Clone() const { return new RemoveCatMenuOption(); }
     };
 
     class DisplayCatsMenuOption : public MenuOption
@@ -48,6 +51,7 @@ namespace cc
         {
             GetCatRegistry(callingMenu).DisplayAllCats();
         }
+        MenuOption* Clone() const { return new DisplayCatsMenuOption(); }
     };
 
     class ExitMenuOption : public MenuOption
@@ -58,6 +62,7 @@ namespace cc
         {
             callingMenu.Stop();
         }
+        MenuOption* Clone() const { return new ExitMenuOption(); }
     };
 }
 
@@ -66,7 +71,8 @@ void cc::Menu::Run()
     while (m_shouldContinue)
     {
         PrintMenu();
-
+        system("pause");
+        // TODO
     }
 }
 
@@ -108,4 +114,41 @@ cc::Menu::Menu()
     m_menuOptions.emplace_back(std::make_unique<RemoveCatMenuOption>());
     m_menuOptions.emplace_back(std::make_unique<DisplayCatsMenuOption>());
     m_menuOptions.emplace_back(std::make_unique<ExitMenuOption>());
+}
+
+cc::Menu::Menu(const Menu& other)
+    : m_shouldContinue(other.m_shouldContinue), m_catRegistry(other.m_catRegistry)
+{
+    m_menuOptions.reserve(other.m_menuOptions.size());
+    for (const auto& o : other.m_menuOptions)
+        m_menuOptions.emplace_back(o->Clone());
+}
+
+cc::Menu::Menu(Menu&& other) noexcept
+    : m_shouldContinue(other.m_shouldContinue), m_menuOptions(std::move(other.m_menuOptions)),
+    m_catRegistry(std::move(other.m_catRegistry))
+{}
+
+cc::Menu::~Menu() {}
+
+cc::Menu& cc::Menu::operator=(const Menu& other)
+{
+    m_shouldContinue = other.m_shouldContinue;
+
+    m_menuOptions.reserve(other.m_menuOptions.size());
+    for (const auto& o : other.m_menuOptions)
+        m_menuOptions.emplace_back(o->Clone());
+
+    m_catRegistry = other.m_catRegistry;
+
+    return *this;
+}
+
+cc::Menu& cc::Menu::operator=(Menu&& other) noexcept
+{
+    m_shouldContinue = other.m_shouldContinue;
+    m_menuOptions = std::move(other.m_menuOptions);
+    m_catRegistry = std::move(other.m_catRegistry);
+
+    return *this;
 }

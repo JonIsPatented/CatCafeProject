@@ -10,10 +10,10 @@ namespace cc
     public:
         void DisplayInformation() const;
     public:
-        std::string GetFirstName();
-        std::string GetLastName();
-        std::string GetPhoneNumberAsString();
-        uint16_t GetPhoneNumber();
+        std::string GetFirstName() const;
+        std::string GetLastName() const;
+        std::string GetPhoneNumberAsString() const;
+        uint16_t GetPhoneNumber() const;
     public:
         void SetFirstName(const std::string&);
         void SetLastName(const std::string&);

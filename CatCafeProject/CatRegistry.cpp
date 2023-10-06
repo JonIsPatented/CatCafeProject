@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <type_traits>
+#include <stdexcept>
+
+#include "StringManip.h"
 
 cc::CatRegistry::CatRegistry() {}
 
@@ -42,6 +45,52 @@ void cc::CatRegistry::PromptCreate()
     );
 }
 
+void cc::CatRegistry::PromptRemove()
+{
+    DisplayAllCats();
+    std::cout << "Enter the ID of the cat to remove (or 'cancel'): ";
+
+    bool validCat{ false };
+    while (!validCat)
+    {
+        uint32_t inputId{ 0 };
+        std::string input;
+        getline(std::cin, input);
+        
+        if (toLowerCase(input) == "cancel")
+            return;
+
+        try
+        {
+            inputId = std::stoi(input);
+
+            size_t foundCatIndex{ 0 };
+            for (size_t i = 0; i < m_cats.size(); i++)
+                if (m_cats[i].m_id == inputId)
+                {
+                    foundCatIndex = i;
+                    validCat = true;
+                    break;
+                }
+
+            if (!validCat)
+                throw std::exception();
+
+            Remove(foundCatIndex);
+        }
+        catch (std::invalid_argument&)
+        {
+            std::cout << "Invalid Input. Enter an ID." << std::endl;
+        }
+        catch (std::exception&)
+        {
+            std::cout << "No cat found for the provided ID." << std::endl;
+        }
+    }
+
+    std::cout << "Cat successfully removed.\n" << std::endl;
+}
+
 void cc::CatRegistry::Add(const Cat& cat)
 {
     m_cats.push_back(cat);
@@ -55,6 +104,11 @@ void cc::CatRegistry::Add(Cat&& cat) noexcept
 void cc::CatRegistry::Remove(const size_t index)
 {
     m_cats.erase(m_cats.begin() + index);
+}
+
+size_t cc::CatRegistry::Size() const
+{
+    return m_cats.size();
 }
 
 cc::CatRegistry& cc::CatRegistry::operator=(const CatRegistry& other)

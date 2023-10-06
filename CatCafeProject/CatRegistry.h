@@ -12,9 +12,11 @@ namespace cc
 	public:
 		void DisplayAllCats() const;
 		void PromptCreate();
+		void PromptRemove();
 		void Add(const Cat&);
 		void Add(Cat&&) noexcept;
 		void Remove(const size_t);
+		size_t Size() const;
 	public:
 		Cat& operator[](size_t);
 		const Cat& operator[](size_t) const;
