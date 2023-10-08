@@ -66,13 +66,37 @@ namespace cc
     };
 }
 
+size_t getIndexFromUserInRange(size_t min, size_t max)
+{
+    std::string inputString;
+    size_t userInput{ 0 };
+    bool validInput{ false };
+    while (!validInput)
+    {
+        std::getline(std::cin, inputString);
+        try
+        {
+            userInput = std::stoi(inputString);
+            if (userInput < min || userInput > max)
+                throw std::exception();
+            validInput = true;
+        }
+        catch (std::exception&)
+        {
+            std::cout << "Please enter a number between " << min
+                << " and " << max << "." << std::endl;
+        }
+    }
+    return userInput;
+}
+
 void cc::Menu::Run()
 {
     while (m_shouldContinue)
     {
         PrintMenu();
-        system("pause");
-        // TODO
+        size_t userInput{ getIndexFromUserInRange(1, m_menuOptions.size()) };
+        m_menuOptions[userInput-1]->Activate(*this);
     }
 }
 
